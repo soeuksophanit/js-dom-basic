@@ -45,3 +45,27 @@ const lives = document.querySelector<HTMLLIElement>(".box .live")!;
 //calling the click btn event
 btn.addEventListener("click", getResult);
 resetBtn.addEventListener("click", resetValue);
+
+// ----------- todo list ------------
+const todolist = document.querySelector<HTMLUListElement>(".todo-list")!;
+const btnSubmit = document.querySelector<HTMLButtonElement>(".btn-submit")!;
+const inputText = document.querySelector<HTMLInputElement>(".input-text")!;
+const countList = document.querySelector<HTMLSpanElement>("p span")!;
+
+btnSubmit.addEventListener("click", function (e) {
+  e.preventDefault();
+  // create element
+  const newList = document.createElement("li") as HTMLLIElement;
+  newList.classList.add("item");
+  newList.innerText = inputText.value;
+  todolist.appendChild(newList);
+  const list = todolist.children;
+  countList.innerText = String(list.length);
+  console.log(list);
+  newList.addEventListener("click", deleteItem);
+});
+
+function deleteItem(e: Event) {
+  console.log(e.target);
+  e.target?.remove();
+}
